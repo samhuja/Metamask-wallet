@@ -1,0 +1,30 @@
+// Check if MetaMask is installed
+if (typeof window.ethereum !== 'undefined') {
+  console.log('MetaMask is installed!');
+} else {
+  console.log('Please install MetaMask to use this feature.');
+}
+
+// Connect to MetaMask
+async function connectToMetaMask() {
+  try {
+    // Request access to the user's MetaMask accounts
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    console.log('Connected to MetaMask!');
+
+    // Get the selected account
+    const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+    const selectedAccount = accounts[0];
+    console.log('Selected account:', selectedAccount);
+
+    // You can now interact with the MetaMask wallet
+    // For example, you can use web3.js or ethers.js to interact with smart contracts
+  } catch (error) {
+    console.error('Error connecting to MetaMask:', error);
+  }
+}
+
+// Call the connectToMetaMask function when the user clicks a button or performs an action
+// For example:
+// const connectButton = document.getElementById('connectButton');
+// connectButton.addEventListener('click', connectToMetaMask);
